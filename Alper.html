@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alper Tunc</title>
+    <link href="https://fonts.googleapis.com/css2?family=Chillax:wght@300;400;500;600;700" rel="stylesheet">
+    <link rel="icon" type="image/png" href="https://cdn.solo.to/user/a/6784fe6c8f14e5_70688583.jpg">
+    <style>
+        :root {
+            --background: #000000;
+            /* AMOLED black */
+            --text: #ffffff;
+            --glass: rgba(255, 255, 255, 0.1);
+            --blur: blur(12px);
+            --transition-duration: 0.5s;
+            --card-shadow: 0 4px 20px rgba(255, 255, 255, 0.05);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Chillax', sans-serif;
+        }
+
+        body {
+            background: var(--background);
+            color: var(--text);
+            transition: background-color var(--transition-duration) ease,
+                color var(--transition-duration) ease;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .profile-section {
+            margin: 2rem 0 4rem 0;
+        }
+
+        .profile-picture {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin: 2rem auto;
+            border: 4px solid rgba(255, 255, 255, 0.2);
+            box-shadow: var(--card-shadow);
+            transition: transform 0.3s ease;
+        }
+
+        .profile-picture:hover {
+            transform: scale(1.05);
+        }
+
+        .profile-section h1 {
+            font-size: 2.5rem;
+            margin: 1rem 0;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        .profile-section p {
+            font-size: 1.2rem;
+            opacity: 0.8;
+            animation: fadeIn 1.5s ease-in-out;
+        }
+
+        .social-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 1.5rem;
+            margin: 3rem auto;
+            padding: 1rem;
+            max-width: 1000px;
+        }
+
+        .social-card {
+            background: var(--glass);
+            backdrop-filter: var(--blur);
+            border-radius: 15px;
+            padding: 1.5rem;
+            transition: transform 0.3s ease, background 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            text-decoration: none;
+            color: var(--text);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+            animation: slideUp 0.5s ease-in-out;
+        }
+
+        .social-card:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .social-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .social-card:hover .social-icon {
+            transform: scale(1.1);
+        }
+
+        .social-text {
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .photo-showcase {
+            margin: 4rem 0;
+        }
+
+        .photo-showcase h2 {
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        .yearly-photos {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            padding: 1rem;
+        }
+
+        .photo-card {
+            background: var(--glass);
+            backdrop-filter: var(--blur);
+            border-radius: 15px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: transform 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        .photo-card img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .photo-info {
+            padding: 1.5rem;
+            text-align: left;
+            background-color: transparent;
+            color: var(--text);
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.6), transparent);
+            border-radius: 0 0 15px 15px;
+        }
+
+        .photo-info h3 {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .photo-info p {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        .photo-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .photo-card:hover img {
+            transform: scale(1.10);
+        }
+
+        .fullscreen-viewer {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 1001;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .fullscreen-viewer.active {
+            display: flex;
+            opacity: 1;
+        }
+
+        .fullscreen-image {
+            max-width: 90%;
+            max-height: 90vh;
+            object-fit: contain;
+            transform: scale(0.9);
+            opacity: 0;
+            transition: transform 0.4s ease, opacity 0.4s ease;
+        }
+
+        .fullscreen-viewer.active .fullscreen-image {
+            transform: scale(1);
+            opacity: 1;
+        }
+
+        .close-viewer {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            color: white;
+            font-size: 30px;
+            cursor: pointer;
+            background: rgba(0, 0, 0, 0.5);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.3s ease;
+        }
+
+        .close-viewer:hover {
+            transform: rotate(90deg);
+        }
+
+        .image-caption {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: white;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 10px 20px;
+            border-radius: 10px;
+            font-size: 0.9rem;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideUp {
+            from {
+                transform: translateY(20px);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+
+            .social-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .yearly-photos {
+                grid-template-columns: 1fr;
+            }
+
+            .photo-card img {
+                height: 200px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="fullscreen-viewer" id="fullscreen-viewer">
+        <div class="close-viewer" id="close-viewer">×</div>
+        <img src="" alt="" class="fullscreen-image" id="fullscreen-image">
+        <div class="image-caption" id="image-caption"></div>
+    </div>
+
+    <div class="container">
+        <div class="profile-section">
+            <img src="https://cdn.solo.to/user/a/6784fe6c8f14e5_70688583.jpg" alt="Profile Picture"
+                class="profile-picture">
+            <h1>Alper Tunc</h1>
+            <p>Just a Photographic Guy</p>
+        </div>
+        <div class="social-grid">
+            <a href="https://www.tiktok.com/@a.tunc29" class="social-card" target="_blank" rel="noopener">
+                <img src="https://cdn.solo.to/images/social/tiktok-dark.svg" alt="TikTok" class="social-icon">
+                <span class="social-text">TikTok</span>
+            </a>
+            <a href="https://x.com/a_tunc29" class="social-card" target="_blank" rel="noopener">
+                <img src="https://cdn.solo.to/images/social/x-dark.svg" alt="Twitter" class="social-icon">
+                <span class="social-text">X</span>
+            </a>
+            <a href="https://www.instagram.com/ayka.tunc/" class="social-card" target="_blank" rel="noopener">
+                <img src="https://cdn.solo.to/images/social/instagram.svg" alt="Instagram" class="social-icon">
+                <span class="social-text">Instagram</span>
+            </a>
+            <a href="https://www.snapchat.com/add/a.tunc29" class="social-card" target="_blank" rel="noopener">
+                <img src="https://cdn.solo.to/images/social/snapchat.svg" alt="Snapchat" class="social-icon">
+                <span class="social-text">Snapchat</span>
+            </a>
+            <a href="https://discord.gg/users/816721256790753362" class="social-card" target="_blank" rel="noopener">
+                <img src="https://cdn.solo.to/images/social/discord.svg" alt="Snapchat" class="social-icon">
+                <span class="social-text">Discord</span>
+            </a>
+            <a href="https://t.me/a_tunc29" class="social-card" target="_blank" rel="noopener">
+                <img src="https://cdn.solo.to/images/social/telegram.svg" alt="Telegram" class="social-icon">
+                <span class="social-text">Telegram</span>
+            </a>
+            <a href="https://www.xiaohongshu.com/user/profile/678656c4000000000803fb91" class="social-card"
+                target="_blank" rel="noopener">
+                <img src="https://cdn.solo.to/images/link/xiaohongshu.svg" alt="XiaoHongShu" class="social-icon">
+                <span class="social-text">XiaoHongShu</span>
+            </a>
+            <a href="https://open.spotify.com/user/ahlat1979" class="social-card" target="_blank" rel="noopener">
+                <img src="https://cdn.solo.to/images/social/spotify.svg" alt="Spotify" class="social-icon">
+                <span class="social-text">Spotify</span>
+            </a>
+            <a href="https://www.duolingo.com/profile/a.tunc29" class="social-card" target="_blank" rel="noopener">
+                <img src="https://cdn.solo.to/images/link/duolingo.svg" alt="Duolingo" class="social-icon">
+                <span class="social-text">Duolingo</span>
+            </a>
+            <a href="https://profile.playstation.com/Turkzz29" class="social-card" target="_blank" rel="noopener">
+                <img src="https://cdn.solo.to/images/link/playstation.svg" alt="PlayStation" class="social-icon">
+                <span class="social-text">Playstation</span>
+            </a>
+            <a href="https://www.roblox.com/users/atunc29" class="social-card" target="_blank" rel="noopener">
+                <img src="https://cdn.solo.to/images/link/roblox.svg" alt="Roblox" class="social-icon">
+                <span class="social-text">Roblox</span>
+            </a>
+            <a href="https://www.youtube.com/@a.tunc29" class="social-card" target="_blank" rel="noopener">
+                <img src="https://cdn.solo.to/images/social/youtube.svg" alt="YouTube" class="social-icon">
+                <span class="social-text">YouTube</span>
+            </a>
+            <a href="https://kick.com/a-tunc29" class="social-card" target="_blank" rel="noopener">
+                <img src="https://cdn.solo.to/images/social/kick.svg" alt="Duolingo" class="social-icon">
+                <span class="social-text">Kick</span>
+            </a>
+            <a href="https://www.twitch.tv/atunc29" class="social-card" target="_blank" rel="noopener">
+                <img src="https://cdn.solo.to/images/social/twitch.svg" alt="Twitch" class="social-icon">
+                <span class="social-text">Twitch</span>
+            </a>
+        </div>
+
+        <div class="photo-showcase">
+            <h2>Photos of the Year</h2>
+            <div class="yearly-photos">
+                <div class="photo-card" onclick="showFullscreen(this)" data-year="2022">
+                    <img src="https://i.ibb.co/pjPJv48M/d8c57995-7e4c-4f82-bc86-7f4bbd76d2ef.jpg" alt="Photo 2022">
+                    <div class="photo-info">
+                        <h3>2022</h3>
+                        <p>Istanbul - 11th August</p>
+                    </div>
+                </div>
+                <div class="photo-card" onclick="showFullscreen(this)" data-year="2023">
+                    <img src="https://i.ibb.co/Hfw8WCcd/IMG-20240929-195039-1.jpg" alt="Photo 2023">
+                    <div class="photo-info">
+                        <h3>2023</h3>
+                        <p>Luton - 23rd November</p>
+                    </div>
+                </div>
+                <div class="photo-card" onclick="showFullscreen(this)" data-year="2024">
+                    <img src="https://i.ibb.co/ymz7RRKZ/IMG-20240717-204041.jpg" alt="Photo 2024">
+                    <div class="photo-info">
+                        <h3>2024</h3>
+                        <p>Luton - 17th July</p>
+                    </div>
+                </div>
+                <div class="photo-card" onclick="showFullscreen(this)" data-year="2025">
+                    <img src="https://i.ibb.co/5X8pcPty/IMG-20250110-153255.jpg" alt="Photo 2025">
+                    <div class="photo-info">
+                        <h3>2025</h3>
+                        <p>Luton - 10th January</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const viewer = document.getElementById('fullscreen-viewer');
+            const fullscreenImage = document.getElementById('fullscreen-image');
+            const imageCaption = document.getElementById('image-caption');
+            const closeViewer = document.getElementById('close-viewer');
+
+            window.showFullscreen = function (card) {
+                const img = card.querySelector('img');
+                const year = card.getAttribute('data-year');
+                const caption = card.querySelector('.photo-info p').textContent;
+
+                fullscreenImage.src = img.src;
+                fullscreenImage.alt = img.alt;
+                imageCaption.textContent = `${year} - ${caption}`;
+
+                viewer.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            };
+
+            function closeFullscreen() {
+                viewer.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            }
+
+            viewer.addEventListener('click', (e) => {
+                if (e.target === viewer || e.target === closeViewer) {
+                    closeFullscreen();
+                }
+            });
+
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && viewer.classList.contains('active')) {
+                    closeFullscreen();
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>
