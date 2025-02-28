@@ -6,16 +6,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Alper Tunc</title>
     <link href="https://fonts.googleapis.com/css2?family=Chillax:wght@300;400;500;600;700" rel="stylesheet">
-    <link rel="icon" type="image/png"assets/logo.jpg">
+    <link rel="icon" type="image/png" href="assets/logo.jpg">
     <style>
         :root {
-            --background: #000000;
-            /* AMOLED black */
+            --background: #0a0a0a; /* Dark background for Ramadan theme */
             --text: #ffffff;
             --glass: rgba(255, 255, 255, 0.1);
             --blur: blur(12px);
             --transition-duration: 0.5s;
-            --card-shadow: 0 4px 20px rgba(255, 255, 255, 0.05);
+            --card-shadow: 0 4px 20px rgba(255, 215, 0, 0.2); /* Golden shadow for Ramadan theme */
+            --golden: #FFD700; /* Golden color for Ramadan theme */
         }
 
         * {
@@ -31,6 +31,108 @@
             transition: background-color var(--transition-duration) ease,
                 color var(--transition-duration) ease;
             min-height: 100vh;
+            background-size: cover, 300px;
+            background-position: center, center;
+            background-blend-mode: overlay;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Ramadan Decorations */
+        .ramadan-decor {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none; /* Ensure decorations don't interfere with clicks */
+        }
+
+        .ramadan-decor .crescent-moon {
+            position: absolute;
+            font-size: 3rem;
+            color: var(--golden);
+            animation: float 6s infinite ease-in-out;
+        }
+
+        .ramadan-decor .crescent-moon:nth-child(1) {
+            top: 10%;
+            left: 5%;
+            animation-delay: 0s;
+        }
+
+        .ramadan-decor .crescent-moon:nth-child(2) {
+            top: 20%;
+            right: 10%;
+            animation-delay: 2s;
+        }
+
+        .ramadan-decor .crescent-moon:nth-child(3) {
+            top: 50%;
+            left: 15%;
+            animation-delay: 4s;
+        }
+
+        .ramadan-decor .lantern {
+            position: absolute;
+            font-size: 2.5rem;
+            color: var(--golden);
+            animation: float 5s infinite ease-in-out;
+        }
+
+        .ramadan-decor .lantern:nth-child(4) {
+            top: 30%;
+            right: 20%;
+            animation-delay: 1s;
+        }
+
+        .ramadan-decor .lantern:nth-child(5) {
+            top: 60%;
+            left: 25%;
+            animation-delay: 3s;
+        }
+
+        .ramadan-decor .star {
+            position: absolute;
+            font-size: 1.5rem;
+            color: var(--golden);
+            animation: twinkle 2s infinite ease-in-out;
+        }
+
+        .ramadan-decor .star:nth-child(6) {
+            top: 15%;
+            left: 30%;
+            animation-delay: 0s;
+        }
+
+        .ramadan-decor .star:nth-child(7) {
+            top: 40%;
+            right: 30%;
+            animation-delay: 1s;
+        }
+
+        .ramadan-decor .star:nth-child(8) {
+            top: 70%;
+            left: 40%;
+            animation-delay: 2s;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+
+        @keyframes twinkle {
+            0%, 100% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0.5;
+            }
         }
 
         .container {
@@ -38,6 +140,8 @@
             margin: 0 auto;
             padding: 20px;
             text-align: center;
+            position: relative;
+            z-index: 1; /* Ensure content is above decorations */
         }
 
         .profile-section {
@@ -50,7 +154,7 @@
             border-radius: 50%;
             object-fit: cover;
             margin: 2rem auto;
-            border: 4px solid rgba(255, 255, 255, 0.2);
+            border: 4px solid var(--golden); /* Golden border */
             box-shadow: var(--card-shadow);
             transition: transform 0.3s ease;
         }
@@ -63,12 +167,29 @@
             font-size: 2.5rem;
             margin: 1rem 0;
             animation: fadeIn 1s ease-in-out;
+            color: var(--golden); /* Golden text */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .profile-section h1::after {
+            content: '🌙'; /* Crescent moon icon */
+            font-size: 1.5rem;
         }
 
         .profile-section p {
             font-size: 1.2rem;
             opacity: 0.8;
             animation: fadeIn 1.5s ease-in-out;
+        }
+
+        .ramadan-greeting {
+            font-size: 1.5rem;
+            color: var(--golden);
+            margin-top: 1rem;
+            animation: fadeIn 2s ease-in-out;
         }
 
         .social-grid {
@@ -86,7 +207,7 @@
             border-radius: 15px;
             padding: 1.5rem;
             transition: transform 0.3s ease, background 0.3s ease;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            border: 1px solid var(--golden); /* Golden border */
             text-decoration: none;
             color: var(--text);
             display: flex;
@@ -94,11 +215,29 @@
             align-items: center;
             gap: 0.3rem;
             animation: slideUp 0.5s ease-in-out;
+            box-shadow: var(--card-shadow);
+            position: relative;
+            overflow: hidden;
         }
 
         .social-card:hover {
             transform: translateY(-5px);
-            background: rgba(255, 255, 255, 0.15);
+            background: rgba(255, 215, 0, 0.1); /* Golden hover effect */
+        }
+
+        .social-card::before {
+            content: '🪔'; /* Lantern icon */
+            position: absolute;
+            top: -20px;
+            right: -20px;
+            font-size: 2rem;
+            opacity: 0;
+            transition: opacity 0.3s ease, transform 0.3s ease;
+        }
+
+        .social-card:hover::before {
+            opacity: 1;
+            transform: translate(-10px, 10px);
         }
 
         .social-icon {
@@ -132,6 +271,7 @@
             font-size: 2rem;
             margin-bottom: 2rem;
             animation: fadeIn 1s ease-in-out;
+            color: var(--golden); /* Golden text */
         }
 
         .yearly-photos {
@@ -146,11 +286,12 @@
             backdrop-filter: var(--blur);
             border-radius: 15px;
             overflow: hidden;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            border: 1px solid var(--golden); /* Golden border */
             transition: transform 0.3s ease;
             cursor: pointer;
             position: relative;
             animation: fadeIn 1s ease-in-out;
+            box-shadow: var(--card-shadow);
         }
 
         .photo-card img {
@@ -176,6 +317,7 @@
         .photo-info h3 {
             font-size: 1.2rem;
             margin-bottom: 0.5rem;
+            color: var(--golden); /* Golden text */
         }
 
         .photo-info p {
@@ -301,6 +443,18 @@
 </head>
 
 <body>
+    <!-- Ramadan Decorations -->
+    <div class="ramadan-decor">
+        <div class="crescent-moon">🌙</div>
+        <div class="crescent-moon">🌙</div>
+        <div class="crescent-moon">🌙</div>
+        <div class="lantern">🪔</div>
+        <div class="lantern">🪔</div>
+        <div class="star">⭐</div>
+        <div class="star">⭐</div>
+        <div class="star">⭐</div>
+    </div>
+
     <div class="fullscreen-viewer" id="fullscreen-viewer">
         <div class="close-viewer" id="close-viewer">×</div>
         <img src="" alt="" class="fullscreen-image" id="fullscreen-image">
@@ -310,10 +464,10 @@
     <div class="container">
         <!-- Profile Section -->
         <div class="profile-section">
-            <img src="assets/logo.jpg" alt="Profile Picture"
-                class="profile-picture">
+            <img src="assets/logo.jpg" alt="Profile Picture" class="profile-picture">
             <h1>Alper Tunc</h1>
             <p>Erm.. idk what to type here. hi</p>
+            <div class="ramadan-greeting">Ramadan Mubarak! 🌙</div>
         </div>
 
         <!-- Social Links -->
@@ -321,129 +475,125 @@
             <a href="https://www.tiktok.com/@a.tunc29" class="social-card" target="_blank" rel="noopener">
                 <img src="assets/tiktok.svg" alt="TikTok" class="social-icon">
                 <span class="social-text">TikTok</span>
-                    <p class="description">a.tunc29</p>
+                <p class="description">a.tunc29</p>
             </a>
             <a href="https://x.com/a_tunc29" class="social-card" target="_blank" rel="noopener">
                 <img src="assets/x.svg" alt="Twitter" class="social-icon">
                 <span class="social-text">X</span>
-                    <p class="description">a_tunc29</p>
+                <p class="description">a_tunc29</p>
             </a>
             <a href="https://www.instagram.com/ayka.tunc/" class="social-card" target="_blank" rel="noopener">
                 <img src="assets/instagram.svg" alt="Instagram" class="social-icon">
                 <span class="social-text">Instagram</span>
-                    <p class="description">ayka.tunc</p>
+                <p class="description">ayka.tunc</p>
             </a>
             <a href="https://www.snapchat.com/add/a.tunc29" class="social-card" target="_blank" rel="noopener">
                 <img src="assets/snapchat.svg" alt="Snapchat" class="social-icon">
                 <span class="social-text">Snapchat</span>
-                    <p class="description">a.tunc29</p>
+                <p class="description">a.tunc29</p>
             </a>
             <a href="https://discord.gg/users/816721256790753362" class="social-card" target="_blank" rel="noopener">
                 <img src="assets/discord.svg" alt="Discord" class="social-icon">
                 <span class="social-text">Discord</span>
-                    <p class="description">a.tunc29</p>
+                <p class="description">a.tunc29</p>
             </a>
             <a href="https://t.me/atunc29" class="social-card" target="_blank" rel="noopener">
                 <img src="assets/telegram.svg" alt="Telegram" class="social-icon">
                 <span class="social-text">Telegram</span>
-                    <p class="description">atunc29</p>
+                <p class="description">atunc29</p>
             </a>
-            <a href="https://www.xiaohongshu.com/user/profile/678656c4000000000803fb91" class="social-card"
-                target="_blank" rel="noopener">
+            <a href="https://www.xiaohongshu.com/user/profile/678656c4000000000803fb91" class="social-card" target="_blank" rel="noopener">
                 <img src="assets/xiaohongshu.svg" alt="XiaoHongShu" class="social-icon">
                 <span class="social-text">XiaoHongShu</span>
-                    <p class="description">atunc29</p>
+                <p class="description">atunc29</p>
             </a>
-            <a href="https://www.threads.net/@ayka.tunc" class="social-card"
-                target="_blank" rel="noopener">
+            <a href="https://www.threads.net/@ayka.tunc" class="social-card" target="_blank" rel="noopener">
                 <img src="assets/threads.svg" alt="Threads" class="social-icon">
                 <span class="social-text">Threads</span>
-                    <p class="description">ayka.tunc</p>
+                <p class="description">ayka.tunc</p>
             </a>
-            <a href="https://bsky.app/profile/atunc29.pro" class="social-card"
-                target="_blank" rel="noopener">
+            <a href="https://bsky.app/profile/atunc29.pro" class="social-card" target="_blank" rel="noopener">
                 <img src="assets/bluesky.svg" alt="BlueSky" class="social-icon">
                 <span class="social-text">BlueSky</span>
-                    <p class="description">atunc29</p>
+                <p class="description">atunc29</p>
             </a>
-            <a href="https://stats.fm/a.tunc29" class="social-card"
-                target="_blank" rel="noopener">
+            <a href="https://stats.fm/a.tunc29" class="social-card" target="_blank" rel="noopener">
                 <img src="assets/stats.fm.svg" alt="Stats.fm" class="social-icon">
                 <span class="social-text">Stats.fm</span>
-                    <p class="description">a.tunc29</p>
+                <p class="description">a.tunc29</p>
             </a>
             <a href="https://open.spotify.com/user/ahlat1979" class="social-card" target="_blank" rel="noopener">
                 <img src="assets/spotify.svg" alt="Spotify" class="social-icon">
                 <span class="social-text">Spotify</span>
-                    <p class="description">ahlat1979</p>
+                <p class="description">ahlat1979</p>
             </a>
             <a href="https://www.duolingo.com/profile/a.tunc29" class="social-card" target="_blank" rel="noopener">
                 <img src="assets/duolingo.svg" alt="Duolingo" class="social-icon">
                 <span class="social-text">Duolingo</span>
-                    <p class="description">a.tunc29</p>
+                <p class="description">a.tunc29</p>
             </a>
             <a href="https://profile.playstation.com/Turkzz29" class="social-card" target="_blank" rel="noopener">
                 <img src="assets/playstation.svg" alt="PlayStation" class="social-icon">
                 <span class="social-text">Playstation</span>
-                    <p class="description">atunc29</p>
+                <p class="description">atunc29</p>
             </a>
             <a href="https://www.xbox.com/tr-TR/play/user/atunc29" class="social-card" target="_blank" rel="noopener">
                 <img src="assets/xbox.svg" alt="Xbox" class="social-icon">
                 <span class="social-text">Xbox</span>
-                    <p class="description">atunc29</p>
+                <p class="description">atunc29</p>
             </a>
             <a href="https://www.roblox.com/users/1200175076/profile" class="social-card" target="_blank" rel="noopener">
                 <img src="assets/roblox.svg" alt="Roblox" class="social-icon">
                 <span class="social-text">Roblox</span>
-                    <p class="description">atunc29</p>
+                <p class="description">atunc29</p>
             </a>
             <a href="https://www.youtube.com/@a.tunc29" class="social-card" target="_blank" rel="noopener">
                 <img src="assets/youtube.svg" alt="YouTube" class="social-icon">
                 <span class="social-text">YouTube</span>
-                    <p class="description">a.tunc29</p>
+                <p class="description">a.tunc29</p>
             </a>
             <a href="https://kick.com/atunc29" class="social-card" target="_blank" rel="noopener">
                 <img src="assets/kick.svg" alt="Kick" class="social-icon">
                 <span class="social-text">Kick</span>
-                    <p class="description">atunc29</p>
+                <p class="description">atunc29</p>
             </a>
             <a href="https://www.twitch.tv/atunc29" class="social-card" target="_blank" rel="noopener">
                 <img src="assets/twitch.svg" alt="Twitch" class="social-icon">
                 <span class="social-text">Twitch</span>
-                    <p class="description">atunc29</p>
+                <p class="description">atunc29</p>
             </a>
         </div>
 
-            <div class="photo-showcase">
-                <h2>Best Photos of the Year</h2>
-                <div class="yearly-photos">
-                    <div class="photo-card" onclick="showFullscreen(this)" data-year="2022">
-                        <img src="https://i.ibb.co/pjPJv48M/d8c57995-7e4c-4f82-bc86-7f4bbd76d2ef.jpg" alt="Photo 2022">
-                        <div class="photo-info">
-                            <h3>2022</h3>
-                            <p>Istanbul - 11th August</p>
-                        </div>
+        <!-- Photo Showcase -->
+        <div class="photo-showcase">
+            <h2>Best Photos of the Year</h2>
+            <div class="yearly-photos">
+                <div class="photo-card" onclick="showFullscreen(this)" data-year="2022">
+                    <img src="https://i.ibb.co/pjPJv48M/d8c57995-7e4c-4f82-bc86-7f4bbd76d2ef.jpg" alt="Photo 2022">
+                    <div class="photo-info">
+                        <h3>2022</h3>
+                        <p>Istanbul - 11th August</p>
                     </div>
-                    <div class="photo-card" onclick="showFullscreen(this)" data-year="2023">
-                        <img src="Photos/IMG_20230820_191414_1.jpg" alt="Photo 2023">
-                        <div class="photo-info">
-                            <h3>2023</h3>
-                            <p>Kapadokya - 20th August</p>
-                        </div>
+                </div>
+                <div class="photo-card" onclick="showFullscreen(this)" data-year="2023">
+                    <img src="Photos/IMG_20230820_191414_1.jpg" alt="Photo 2023">
+                    <div class="photo-info">
+                        <h3>2023</h3>
+                        <p>Kapadokya - 20th August</p>
                     </div>
-                    <div class="photo-card" onclick="showFullscreen(this)" data-year="2024">
-                        <img src="https://i.ibb.co/ymz7RRKZ/IMG-20240717-204041.jpg" alt="Photo 2024">
-                        <div class="photo-info">
-                            <h3>2024</h3>
-                            <p>Luton - 17th July</p>
-                        </div>
+                </div>
+                <div class="photo-card" onclick="showFullscreen(this)" data-year="2024">
+                    <img src="https://i.ibb.co/ymz7RRKZ/IMG-20240717-204041.jpg" alt="Photo 2024">
+                    <div class="photo-info">
+                        <h3>2024</h3>
+                        <p>Luton - 17th July</p>
                     </div>
-                    <div class="photo-card" onclick="showFullscreen(this)" data-year="2025">
-                        <img src="Photos/IMG_20250226_211831.jpg" alt="Photo 2025">
-                        <div class="photo-info">
-                            <h3>2025</h3>
-                            <p>Luton - 26th February</p>
-                        </div>
+                </div>
+                <div class="photo-card" onclick="showFullscreen(this)" data-year="2025">
+                    <img src="Photos/IMG_20250226_211831.jpg" alt="Photo 2025">
+                    <div class="photo-info">
+                        <h3>2025</h3>
+                        <p>Luton - 26th February</p>
                     </div>
                 </div>
             </div>
@@ -502,7 +652,7 @@
                     closeFullscreen();
                 }
             });
-	});
+        });
     </script>
 </body>
 
