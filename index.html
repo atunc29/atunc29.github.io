@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Alper — personal portfolio and showcase. Projects, skills and contact.">
+    <meta name="description" content="Check out my projects: Photography, cats, and Vidu AI!">
     <title>Alper</title>
     <!-- Immediate serif fallback while Galaxie Copernicus is hosted locally (or upload licensed files) -->
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
@@ -84,18 +84,12 @@
 
         main{margin-top:0}
         .content-section{min-height:100vh;padding:4rem 1.25rem;background:linear-gradient(180deg,rgba(42,42,42,0.8) 0%,rgba(26,26,26,0.9) 100%)}
-    .container{max-width:1200px;margin:0 auto;padding-left:28px;padding-right:28px}
-    .section-title{font-size:clamp(1.5rem,3.5vw,2.5rem);font-weight:300;margin-bottom:1rem}
+    .container{max-width:1200px;margin:0 auto;padding-left:28px;padding-right:28px;text-align:center}
+    .section-title{font-size:clamp(1.5rem,3.5vw,2.5rem);font-weight:300;margin-bottom:1rem;text-align:center}
 
-        .placeholder-content{padding:2rem;border-radius:var(--radius);background:var(--card);border:1px dashed rgba(255,255,255,.06);backdrop-filter:blur(4px);opacity:1;transform:translateY(0);transition:transform .6s ease,opacity .6s ease}
-        .placeholder-text{color:var(--muted);line-height:1.6}
+    .projects{display:flex;gap:2rem;margin-top:1.5rem;align-items:center;flex-wrap:wrap;justify-content:center;padding-bottom:8px;padding-top:6px}
 
-    .projects{display:flex;gap:2rem;margin-top:1.5rem;align-items:flex-start;overflow-x:auto;padding-bottom:8px;padding-top:6px;scroll-snap-type:x mandatory}
-
-    .projects::-webkit-scrollbar{height:10px}
-    .projects::-webkit-scrollbar-thumb{background:rgba(0,0,0,0.5);border-radius:6px}
-
-    .card{background:transparent;border-radius:10px;cursor:pointer;outline:0;position:relative;flex:0 0 auto;scroll-snap-align:start}
+    .card{background:transparent;border-radius:10px;cursor:pointer;outline:0;position:relative;flex:0 0 auto}
         .poster{
             position:relative;
             width:320px; /* increased width */
@@ -145,16 +139,21 @@
 
         .modal-body{display:flex;gap:18px;padding:20px;background:transparent}
         .modal-desc{flex:1;color:var(--accent)}
-        .meta-panel{width:260px;background:rgba(255,255,255,0.03);padding:12px;border-radius:8px;color:var(--accent);border:1px solid rgba(255,255,255,0.03)}
         .meta-row{margin-top:8px;color:var(--muted)}
-        .pill{display:inline-block;background:rgba(255,255,255,0.04);padding:.35rem .6rem;border-radius:8px;margin-right:.5rem;color:var(--accent)}
+        .pill{display:inline-block;background:rgba(255,255,255,0.04);padding:.35rem .6rem;border-radius:8px;margin-right:.5rem;color:var(--accent);margin-top:12px}
+        .social-links {margin-top: 1rem;}
 
 
         @media (max-width:900px){
             .modal-hero{height:220px}
             .modal-hero h2{font-size:1.4rem}
-            .meta-panel{display:none}
             .modal-body{flex-direction:column}
+        }
+
+        @media (max-width:600px){
+            .projects {flex-direction: column; align-items: center;}
+            .card {width: 90%;}
+            .poster {width: 100%; min-height: auto;}
         }
 
         @media (max-width:820px){
@@ -195,7 +194,7 @@
 
         <div class="hero-content" role="region" aria-labelledby="hero-heading">
             <h1 id="hero-heading" class="hero-title">Alper</h1>
-            <p class="hero-subtitle">Personal showcase — projects, skills and contact. Minimal, accessible, and responsive.</p>
+            <p class="hero-subtitle">Photography, Cats & My Projects</p>
 
         </div>
 
@@ -207,20 +206,20 @@
     <main id="main">
         <section class="content-section" id="content" aria-labelledby="content-heading">
             <div class="container">
-                <h2 id="content-heading" class="section-title">Featured Projects</h2>
+                <h2 id="content-heading" class="section-title">My Creative Space</h2>
 
                 <div class="projects">
-                    <article class="card" tabindex="0" data-title="Photography" data-type="Gallery" data-desc="A selection of photography work." data-image="https://i.postimg.cc/NjpRn1km/IMG-20250624-141250.jpg">
+                    <article class="card" tabindex="0" data-title="Photography" data-type="Gallery" data-desc="Sunset." data-image="https://i.postimg.cc/NjpRn1km/IMG-20250624-141250.jpg">
                         <div class="poster" style="background-image:url('https://i.postimg.cc/NjpRn1km/IMG-20250624-141250.jpg')" role="button" aria-label="Open Photography gallery"></div>
                         <div class="meta"><div class="title">Photography</div><div class="year"></div></div>
                     </article>
 
-                    <article class="card" tabindex="0" data-title="Cats" data-type="Gallery" data-desc="Cute cat photos and studies." data-image="https://i.postimg.cc/mgzbx4Qj/330dade5-eb05-4198-84dc-2de931931e39.jpg">
+                    <article class="card" tabindex="0" data-title="Cats" data-type="Gallery" data-desc="Cute Cat Photo" data-image="https://i.postimg.cc/mgzbx4Qj/330dade5-eb05-4198-84dc-2de931931e39.jpg">
                         <div class="poster" style="background-image:url('https://i.postimg.cc/mgzbx4Qj/330dade5-eb05-4198-84dc-2de931931e39.jpg')" role="button" aria-label="Open Cats gallery"></div>
                         <div class="meta"><div class="title">Cats</div><div class="year"></div></div>
                     </article>
 
-                    <article class="card" tabindex="0" data-title="Vidu Ai" data-type="Portfolio" data-desc="Selected projects and case studies." data-image="https://i.postimg.cc/k48678Kj/da495496764551b621ccfc11fdcdb2b8.png" data-website="https://www.vidu.com">
+                    <article class="card" tabindex="0" data-title="Vidu Ai" data-type="" data-desc="Vidu AI is an AI-powered video generation platform that turns text and images into high-quality videos in seconds. Perfect for creators and teams, it offers features like Text to Video, Image to Video, and anime-style animations. Create professional videos with just a few clicks using our templates and multi-reference technology for consistent, high-quality results." data-image="https://i.postimg.cc/k48678Kj/da495496764551b621ccfc11fdcdb2b8.png" data-website="https://www.vidu.com" data-twitter="https://x.com/ViduAI_official" data-instagram="https://www.instagram.com/viduai_official/" data-linkedin="https://www.linkedin.com/company/vidu-ai" data-youtube="https://www.youtube.com/@Vidu-AI" data-discord="https://discord.com/invite/3pDU8fmQ8Y">
                         <div class="poster" style="background-image:url('https://i.postimg.cc/k48678Kj/da495496764551b621ccfc11fdcdb2b8.png')" role="button" aria-label="Open Vidu Ai"></div>
                         <div class="meta"><div class="title">Vidu Ai</div><div class="year"></div></div>
                     </article>
@@ -234,11 +233,6 @@
                             <div class="modal-hero-overlay">
                                 <div class="modal-hero-inner">
                                     <h2 id="modal-title">Title</h2>
-                                    <div class="modal-actions">
-                                        <button class="btn primary" id="modal-resume">Live</button>
-                                        <button class="btn" id="modal-add">☆</button>
-                                        <button class="btn" id="modal-share">Share</button>
-                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -247,24 +241,14 @@
                             <div class="modal-desc">
                                 <p id="modal-desc">Description</p>
                                 <div id="modal-tags" class="tags"></div>
+                                <div class="social-links"></div>
                             </div>
-                            <aside class="meta-panel" id="modal-side">
-                                <div id="modal-meta">Type • Year</div>
-                                <div class="meta-row"><strong>Technologies:</strong> <span id="modal-language">—</span></div>
-                                <div class="meta-row"><strong>Role:</strong> <span id="modal-release">—</span></div>
-                                <div class="meta-row"><strong>Year / Size:</strong> <span id="modal-rating">—</span></div>
-                                <div style="margin-top:12px" class="meta-links">
-                                    <span class="pill">Website</span>
-                                    <span class="pill">Repository</span>
-                                </div>
-                            </aside>
                         </div>
 
                     </div>
                 </div>
 
-                <div style="margin-top:2.25rem;margin-bottom:2.5rem" class="placeholder-content">
-                </div>
+
             </div>
         </section>
     </main>
@@ -379,35 +363,28 @@
             const modal = document.getElementById('modal');
             const modalTitle = document.getElementById('modal-title');
             const modalDesc = document.getElementById('modal-desc');
-            const modalMeta = document.getElementById('modal-meta');
             const modalPoster = document.getElementById('modal-poster');
             const modalClose = document.getElementById('modal-close');
 
             function openModal(data, trigger){
                 modalTitle.textContent = data.title;
                 document.getElementById('modal-desc').textContent = data.desc || '';
-                document.getElementById('modal-meta').textContent = (data.type ? data.type : '') + (data.year ? (' • ' + data.year) : '');
-                document.getElementById('modal-language').textContent = data.lang || 'EN';
-                document.getElementById('modal-release').textContent = data.release || '—';
-                document.getElementById('modal-rating').textContent = data.rating || '—';
                 const hero = document.getElementById('modal-poster');
                 hero.style.backgroundImage = `url('${data.image}')`;
 
-                document.getElementById('modal-language').textContent = data.tech || '—';
-                document.getElementById('modal-release').textContent = data.role || '—';
-                document.getElementById('modal-rating').textContent = data.size || '—';
-
-                const metaLinks = document.querySelector('.meta-links');
-                if(metaLinks){
-                    metaLinks.innerHTML = '';
-                    if(data.website){ const a = document.createElement('a'); a.href = data.website; a.target='_blank'; a.className='pill'; a.textContent='Website'; metaLinks.appendChild(a); }
+                const socialLinks = document.querySelector('.social-links');
+                if(socialLinks){
+                    socialLinks.innerHTML = '';
+                    if(data.website){ const a = document.createElement('a'); a.href = data.website; a.target='_blank'; a.className='pill'; a.textContent='Website'; socialLinks.appendChild(a); }
+                    if(data.twitter){ const a = document.createElement('a'); a.href = data.twitter; a.target='_blank'; a.className='pill'; a.textContent='X'; socialLinks.appendChild(a); }
+                    if(data.instagram){ const a = document.createElement('a'); a.href = data.instagram; a.target='_blank'; a.className='pill'; a.textContent='Instagram'; socialLinks.appendChild(a); }
+                    if(data.linkedin){ const a = document.createElement('a'); a.href = data.linkedin; a.target='_blank'; a.className='pill'; a.textContent='LinkedIn'; socialLinks.appendChild(a); }
+                    if(data.youtube){ const a = document.createElement('a'); a.href = data.youtube; a.target='_blank'; a.className='pill'; a.textContent='YouTube'; socialLinks.appendChild(a); }
+                    if(data.discord){ const a = document.createElement('a'); a.href = data.discord; a.target='_blank'; a.className='pill'; a.textContent='Discord'; socialLinks.appendChild(a); }
                 }
 
                 modal.setAttribute('aria-hidden','false');
                 modal._trigger = trigger || document.activeElement;
-                // focus first actionable button
-                const resumeBtn = document.getElementById('modal-resume');
-                if(resumeBtn) resumeBtn.focus();
                 document.body.style.overflow = 'hidden';
             }
 
@@ -430,25 +407,18 @@
                     repo: card.getAttribute('data-repo'),
                     tech: card.getAttribute('data-tech'),
                     role: card.getAttribute('data-role'),
-                    size: card.getAttribute('data-year')
+                    size: card.getAttribute('data-year'),
+                    twitter: card.getAttribute('data-twitter'),
+                    instagram: card.getAttribute('data-instagram'),
+                    linkedin: card.getAttribute('data-linkedin'),
+                    youtube: card.getAttribute('data-youtube'),
+                    discord: card.getAttribute('data-discord')
                 };
                 function handleOpen(e){ console.log('poster clicked', data.title); openModal(data, poster); }
                 poster.addEventListener('click', handleOpen);
                 poster.addEventListener('keydown', (e)=>{ if(e.key==='Enter' || e.key===' ') { e.preventDefault(); handleOpen(); } });
                 card.addEventListener('keydown', (e)=>{ if(e.key==='Enter'){ openModal(data, card); } });
             });
-
-            const modalResumeBtn = document.getElementById('modal-resume');
-            if(modalResumeBtn){
-                modalResumeBtn.addEventListener('click', ()=>{
-                    const url = document.querySelector('.meta-links a[href]') ? document.querySelector('.meta-links a[href]').href : null;
-                    if(url) window.open(url, '_blank'); else alert('No live site provided for this project.');
-                });
-            }
-            const modalAddBtn = document.getElementById('modal-add');
-            if(modalAddBtn) modalAddBtn.addEventListener('click', ()=>{ alert('Added to favorites'); });
-            const modalShareBtn = document.getElementById('modal-share');
-            if(modalShareBtn) modalShareBtn.addEventListener('click', ()=>{ alert('Share project (placeholder)'); });
 
             const modalCloseBtn = document.getElementById('modal-close');
             if(modalCloseBtn) modalCloseBtn.addEventListener('click', closeModal);
